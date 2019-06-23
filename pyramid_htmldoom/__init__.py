@@ -20,9 +20,7 @@ __all__ = [
 
 class HTMLDoomRendererFactory:
     def __call__(self, info):
-        name, package = info.name, info.package
-        if name.endswith(".py"):
-            name = name[::-1].replace("yp.", "")[::-1]
+        name, package = info.name[:-3], info.package  # Ignoring .py extension
 
         def template_loader():
             name_with_package = f"{name}.Template"
@@ -45,7 +43,7 @@ class HTMLDoomRenderer:
         try:
             data = dict(system, **value)
         except (TypeError, ValueError) as e:
-            raise ValueError("renderer was passed non-dictionary as value: %{e}")
+            raise ValueError("renderer was passed non-dictionary as value: {e}")
 
         template = self.template_loader()
         return str(template(data))
