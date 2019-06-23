@@ -4,7 +4,7 @@ __author__ = "Arijit Basu"
 __email__ = "sayanarijit@gmail.com"
 __homepage__ = "https://github.com/sayanarijit/pyramid_htmldoom"
 __description__ = "htmldoom rendering library plugin for Pyramid"
-__version__ = "v0.1"
+__version__ = "v0.1.1"
 __license__ = "MIT"
 __all__ = [
     "__author__",

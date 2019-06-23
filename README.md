@@ -53,9 +53,6 @@ class Template(Layout):
     def content(self):
         return e.Div()(
             e.H3()(self["data"]),
-            e.A(href="/")("Home"),
-            e.Br(),
-            e.A(href="/jinja2")("Jinja2"),
         )
 ```
 
