@@ -12,7 +12,7 @@ def home(request):
     return Response(
         str(
             e.HTML()(
-                e.Head()(e.Title("Pyramid template engine demo")),
+                e.Head()(e.Title()("Pyramid template engine demo")),
                 e.Body()(
                     e.H1()("Home page"),
                     e.A(href="/jinja2")("Jinja2"),
