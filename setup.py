@@ -62,6 +62,6 @@ setup(
     platforms=["Any"],
     keywords="html rendering for pyramid",
     packages=find_packages(exclude=["contrib", "docs", "tests", "examples"]),
-    install_requires=["htmldoom>=0.2.3<=0.3"],
+    install_requires=["htmldoom>=0.3<=0.4"],
     extras_require={"testing": testing_requires, "dev": dev_requires},
 )

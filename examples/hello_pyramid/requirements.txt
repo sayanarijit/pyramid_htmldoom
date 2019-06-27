@@ -1,3 +1,4 @@
 pyramid==1.10.4
 pyramid-jinja2==2.8
-pyramid-htmldoom==0.1
+pyramid-htmldoom==0.1.5
+pyramid-debugtoolbar==4.5

@@ -1,9 +1,10 @@
 from wsgiref.simple_server import make_server
 
-from htmldoom import elements as e
 from pyramid.config import Configurator
 from pyramid.response import Response
 from pyramid.view import view_config
+
+from htmldoom import elements as e
 
 
 @view_config(route_name="home")
@@ -40,6 +41,7 @@ if __name__ == "__main__":
     with Configurator() as config:
         config.scan()
         config.add_route("home", "/")
+        config.include("pyramid_debugtoolbar")
 
         # Jinja2 view
         config.include("pyramid_jinja2")
