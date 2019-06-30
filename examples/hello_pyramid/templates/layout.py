@@ -1,17 +1,33 @@
+from htmldoom import base as b
 from htmldoom import elements as e
-from htmldoom.layouts import BaseLayout
+from htmldoom import render as _render
+from htmldoom import renders
+
+doctype = _render(b.doctype("html"))
 
 
-class Layout(BaseLayout):
-    @property
-    def title(self):
-        return e.Title()(self["data"])
+@renders(e.title()("{doctitle}"))
+def render_title(doctitle: str) -> dict:
+    return {"doctitle": doctitle}
 
-    @property
-    def body(self):
-        return e.Body()(e.Div(**{"id": "main"})(self.content))
 
-    @property
-    def content(self):
-        """To be implemented by renderers."""
-        raise NotImplementedError()
+@renders(e.body()("{content}"))
+def render_body(data: dict) -> None:
+    raise NotImplementedError("You are trying to render a layout.")
+
+
+@renders("{doctype}", e.html()(e.head()("{title}"), "{body}"))
+def render_document(
+    data: dict,
+    title_renderer: callable = render_title,
+    body_renderer: callable = render_body,
+) -> dict:
+    return {
+        "doctype": doctype,
+        "title": title_renderer(doctitle=data["data"]),
+        "body": body_renderer(data=data),
+    }
+
+
+def render(data: dict) -> str:
+    return render_document(data=data)

@@ -14,9 +14,11 @@ from pyramid_htmldoom import (
 
 here = path.abspath(path.dirname(__file__))
 
-# Get the long description from the README file
 with open(path.join(here, "README.md"), encoding="utf-8") as f:
     long_description = f.read()
+
+with open(path.join(here, "requirements.txt"), encoding="utf-8") as f:
+    install_requires = f.read().split()
 
 testing_requires = [
     "pytest>=4.4.1",
@@ -62,6 +64,6 @@ setup(
     platforms=["Any"],
     keywords="html rendering for pyramid",
     packages=find_packages(exclude=["contrib", "docs", "tests", "examples"]),
-    install_requires=["htmldoom>=0.3<=0.4"],
+    install_requires=install_requires,
     extras_require={"testing": testing_requires, "dev": dev_requires},
 )

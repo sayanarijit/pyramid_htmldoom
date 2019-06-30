@@ -4,7 +4,7 @@ __author__ = "Arijit Basu"
 __email__ = "sayanarijit@gmail.com"
 __homepage__ = "https://github.com/sayanarijit/pyramid_htmldoom"
 __description__ = "htmldoom rendering library plugin for Pyramid"
-__version__ = "v0.1.5"
+__version__ = "v0.2"
 __license__ = "MIT"
 __all__ = [
     "__author__",
@@ -23,7 +23,7 @@ class HTMLDoomRendererFactory:
         name, package = info.name[:-3], info.package  # Ignoring .py extension
 
         def template_loader():
-            name_with_package = f"{name}.Template"
+            name_with_package = f"{name}.render"
             # if package:
             #     name_with_package = f"{package.__name__}.{name}.Template"
 
@@ -46,7 +46,7 @@ class HTMLDoomRenderer:
             raise ValueError("renderer was passed non-dictionary as value: {e}")
 
         template = self.template_loader()
-        return str(template(data))
+        return template(data)
 
 
 def includeme(config):

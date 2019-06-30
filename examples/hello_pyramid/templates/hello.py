@@ -1,16 +1,20 @@
 from htmldoom import elements as e
+from htmldoom import renders
 
-from .layout import Layout
+from .layout import render_document
 
 
-class Template(Layout):
-    """Hello view renderer"""
+@renders(
+    e.body()(
+        e.h3()("{contents}"),
+        e.a(href="/")("Home"),
+        e.br(),
+        e.a(href="/jinja2")("jinja2"),
+    )
+)
+def render_body(data: dict) -> dict:
+    return {"contents": data["data"]}
 
-    @property
-    def content(self):
-        return e.Div()(
-            e.H3()(self["data"]),
-            e.A(href="/")("Home"),
-            e.Br(),
-            e.A(href="/jinja2")("Jinja2"),
-        )
+
+def render(data: dict) -> str:
+    return render_document(data, body_renderer=render_body)
