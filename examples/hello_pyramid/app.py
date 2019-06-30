@@ -1,26 +1,28 @@
 from wsgiref.simple_server import make_server
 
+from htmldoom import doctype
+from htmldoom import elements as e
+from htmldoom import render
 from pyramid.config import Configurator
 from pyramid.response import Response
 from pyramid.view import view_config
-
-from htmldoom import elements as e
 
 
 @view_config(route_name="home")
 def home(request):
     """Index page - without renderer"""
     return Response(
-        str(
-            e.HTML()(
-                e.Head()(e.Title()("Pyramid template engine demo")),
-                e.Body()(
-                    e.H1()("Home page"),
-                    e.A(href="/jinja2")("Jinja2"),
-                    e.Br(),
-                    e.A(href="/htmldoom")("htmldoom"),
+        render(
+            doctype("html"),
+            e.html()(
+                e.head()(e.title()("Pyramid template engine demo")),
+                e.body()(
+                    e.h1()("Home page"),
+                    e.a(href="/jinja2")("Jinja2"),
+                    e.br(),
+                    e.a(href="/htmldoom")("htmldoom"),
                 ),
-            )
+            ),
         )
     )
 
