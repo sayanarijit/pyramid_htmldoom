@@ -41,6 +41,31 @@ if __name__ == "__main__":
 #### templates/hello.py
 
 ```python
+from htmldoom import elements as e
+from htmldoom import renders
+
+from .layout import render_document
+
+
+@renders(
+    e.body()(
+        e.h3()("{contents}"),
+        e.a(href="/")("Home"),
+        e.br(),
+        e.a(href="/jinja2")("jinja2"),
+    )
+)
+def render_body(data: dict) -> dict:
+    return {"contents": data["data"]}
+
+
+def render(data: dict) -> str:
+    return render_document(data, body_renderer=render_body)
+```
+
+#### templates/layout.py
+
+```python
 from htmldoom import base as b
 from htmldoom import elements as e
 from htmldoom import render as _render
@@ -74,31 +99,6 @@ def render_document(
 
 def render(data: dict) -> str:
     return render_document(data=data)
-```
-
-#### templates/layout.py
-
-```python
-from htmldoom import elements as e
-from htmldoom import renders
-
-from .layout import render_document
-
-
-@renders(
-    e.body()(
-        e.h3()("{contents}"),
-        e.a(href="/")("Home"),
-        e.br(),
-        e.a(href="/jinja2")("jinja2"),
-    )
-)
-def render_body(data: dict) -> dict:
-    return {"contents": data["data"]}
-
-
-def render(data: dict) -> str:
-    return render_document(data, body_renderer=render_body)
 ```
 
 Examples
