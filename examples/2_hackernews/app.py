@@ -2,13 +2,12 @@ import json
 import os
 from wsgiref.simple_server import make_server
 
-from pyramid.config import Configurator
-from pyramid.response import Response
-from pyramid.view import view_config
-
 from htmldoom import doctype
 from htmldoom import elements as e
 from htmldoom import render
+from pyramid.config import Configurator
+from pyramid.response import Response
+from pyramid.view import view_config
 
 with open("news.json") as f:
     news = json.load(f)
@@ -64,6 +63,7 @@ if __name__ == "__main__":
             {
                 "debugtoolbar.hosts": ["0.0.0.0/0"],
                 "debugtoolbar.panels": ["performance", "renderings"],
+                "debugtoolbar.intercept_exc": False,
             }
         )
         app = config.make_wsgi_app()
