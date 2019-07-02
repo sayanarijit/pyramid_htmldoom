@@ -12,9 +12,9 @@ from .layout import render_document
         e.a(href="/jinja2")("jinja2"),
     )
 )
-def render_body(data: dict) -> dict:
+def render_body(data):
     return {"contents": data["data"]}
 
 
-def render(data: dict) -> str:
+def render(data):
     return render_document(data, body_renderer=render_body)

@@ -7,20 +7,18 @@ doctype = _render(b.doctype("html"))
 
 
 @renders(e.title()("{doctitle}"))
-def render_title(doctitle: str) -> dict:
+def render_title(doctitle):
     return {"doctitle": doctitle}
 
 
 @renders(e.body()("{content}"))
-def render_body(data: dict) -> None:
+def render_body(data):
     raise NotImplementedError("You are trying to render a layout.")
 
 
 @renders("{doctype}", e.html()(e.head()("{title}"), "{body}"))
 def render_document(
-    data: dict,
-    title_renderer: callable = render_title,
-    body_renderer: callable = render_body,
+    data, title_renderer=render_title, body_renderer=render_body
 ) -> dict:
     return {
         "doctype": doctype,
@@ -29,5 +27,5 @@ def render_document(
     }
 
 
-def render(data: dict) -> str:
+def render(data):
     return render_document(data=data)
