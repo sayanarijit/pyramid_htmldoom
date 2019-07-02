@@ -2,6 +2,8 @@ pyramid_htmldoom
 ================
 [htmldoom](https://github.com/sayanarijit/htmldoom) rendering library plugin for Pyramid
 
+Checkout the **[live demo](https://htmldoom-pyramid-example.herokuapp.com/)** with **[performance debugging](http://htmldoom-pyramid-example.herokuapp.com/_debug_toolbar/)**
+
 Usage
 ----
 ### Install
