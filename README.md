@@ -104,3 +104,9 @@ def render(data: dict) -> str:
 Examples
 --------
 [Find demo and examples here](https://github.com/sayanarijit/pyramid_htmldoom/blob/master/examples)
+
+### Deploy examples on heroku:
+
+```bash
+git push heroku $(git subtree split --prefix examples/2_hackernews master):master
+```

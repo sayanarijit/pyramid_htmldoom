@@ -1,11 +1,13 @@
+import os
 from wsgiref.simple_server import make_server
+
+from pyramid.config import Configurator
+from pyramid.response import Response
+from pyramid.view import view_config
 
 from htmldoom import doctype
 from htmldoom import elements as e
 from htmldoom import render
-from pyramid.config import Configurator
-from pyramid.response import Response
-from pyramid.view import view_config
 
 
 @view_config(route_name="home")
@@ -53,6 +55,12 @@ if __name__ == "__main__":
         config.include("pyramid_htmldoom")
         config.add_route("hello_htmldoom", "/htmldoom")
 
+        config.add_settings(
+            {
+                "debugtoolbar.hosts": ["0.0.0.0/0"],
+                "debugtoolbar.panels": ["performance", "renderings"],
+            }
+        )
         app = config.make_wsgi_app()
-    server = make_server("localhost", 8080, app)
+    server = make_server("0.0.0.0", int(os.environ.get("PORT", "8080")), app)
     server.serve_forever()

@@ -1,4 +1,5 @@
 import json
+import os
 from wsgiref.simple_server import make_server
 
 from pyramid.config import Configurator
@@ -59,6 +60,12 @@ if __name__ == "__main__":
         config.include("pyramid_htmldoom")
         config.add_route("hackernews_htmldoom", "/htmldoom")
 
+        config.add_settings(
+            {
+                "debugtoolbar.hosts": ["0.0.0.0/0"],
+                "debugtoolbar.panels": ["performance", "renderings"],
+            }
+        )
         app = config.make_wsgi_app()
-    server = make_server("localhost", 8080, app)
+    server = make_server("0.0.0.0", int(os.environ.get("PORT", "8080")), app)
     server.serve_forever()
