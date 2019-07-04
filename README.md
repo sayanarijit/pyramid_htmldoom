@@ -53,8 +53,6 @@ from .layout import render_document
     e.body()(
         e.h3()("{contents}"),
         e.a(href="/")("Home"),
-        e.br(),
-        e.a(href="/jinja2")("jinja2"),
     )
 )
 def render_body(data):
@@ -91,7 +89,7 @@ def render_document(
     data,
     title_renderer=render_title,
     body_renderer=render_body,
-) -> dict:
+):
     return {
         "doctype": doctype,
         "title": title_renderer(doctitle=data["data"]),
