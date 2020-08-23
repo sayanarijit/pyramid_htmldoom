@@ -1,10 +1,11 @@
 from pydoc import locate
+from htmldoom import render
 
 __author__ = "Arijit Basu"
 __email__ = "sayanarijit@gmail.com"
 __homepage__ = "https://github.com/sayanarijit/pyramid_htmldoom"
 __description__ = "htmldoom rendering library plugin for Pyramid"
-__version__ = "v0.2"
+__version__ = "v0.3"
 __license__ = "MIT"
 __all__ = [
     "__author__",
@@ -46,7 +47,7 @@ class HTMLDoomRenderer:
             raise ValueError("renderer was passed non-dictionary as value: {e}")
 
         template = self.template_loader()
-        return template(data)
+        return render(template(data))
 
 
 def includeme(config):
